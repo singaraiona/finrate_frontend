@@ -1,7 +1,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var host = window.location.hostname;
-  var socket = io('https://' + host + ':5000', {secure: true});
+  var socket = io.connect('/');
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
