@@ -1,6 +1,5 @@
 var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
-io.configure(function() {io.set('match original protocol', true);}
 var fs = require('fs');
 
 app.listen(process.env.PORT || 5000);
