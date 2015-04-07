@@ -8,7 +8,7 @@ app.listen(process.env.PORT || 5000);
 
 function handler (req, res) {
     var uri = url.parse(req.url).pathname;
-    if (uri == '/') { uri = uri + 'index.html'; }
+    if (uri == '/') { uri = uri + '.html'; }
     fs.readFile(__dirname + '/public' + uri,
     function (err, data) {
         if (err) {
