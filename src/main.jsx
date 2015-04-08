@@ -29,6 +29,16 @@ var LikeButton = React.createClass({
       }
 });
 
-React.render(<LikeButton />, document.body);
+var Root = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <LikeButton />
+            </div>
+        );
+    }
+});
+
+React.render(<Root />, document.body);
 
 
