@@ -7,9 +7,7 @@ var path = require('path');
 app.listen(process.env.PORT || 5000);
 
 function handler (req, res) {
-    var uri = url.parse(req.url).pathname;
-    if (uri == '/') { uri = uri + '.html'; }
-    fs.readFile(__dirname + '/public' + uri,
+    fs.readFile(__dirname + '/public/index.html',
     function (err, data) {
         if (err) {
             res.writeHead(500);
@@ -23,7 +21,7 @@ function handler (req, res) {
 
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
+  socket.on('event', function (data) {
     console.log(data);
   });
 });

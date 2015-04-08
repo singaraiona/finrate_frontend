@@ -1,4 +1,4 @@
-WAT_OUT = public/.html
+WAT_OUT = public/index.html
 HEADING="FinRates!"
 include wat/Makefile
 

@@ -4,9 +4,11 @@
 *     Creation Date       :     06-04-2015 20:02
 *     Description         :      
 ***/
-var socket = io.connect('/');
+var host = location.origin;
+var socket = io.connect(host, {transports: ["websocket"]});
+var socket = io.connect();
 socket.on('news', function (data) {
    console.log(data);
-   socket.emit('my other event', { my: 'data' });
+   socket.emit('event', { my: 'data' });
 });
 

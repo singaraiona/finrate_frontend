@@ -68,7 +68,8 @@ waup:
 		typescript@1.4.1 \
 		stylus@0.50.0 \
 		react@0.13.1 \
-		mousetrap@1.4.6 # alt: keyboardjs@0.4.2, keypress.js@2.1.0-1
+		mousetrap@1.4.6 \
+		socket.io@1.3.5
 waclean:
 	@ rm -rf $(WAT_OUT) $(WAT_OUT).*
 wawatch:
@@ -84,9 +85,10 @@ $(WAT_OUT): $(WAT_OUT).js
 		"content=\"text/html; charset=utf-8\" />" \
 		"<title>$(HEADING)</title></head>" > $@
 	@ cat $(WAT_SRC)/*.inc >> $@
-	@ printf "<script>\n" >> $@
+	@ printf "<script>" >> $@
 	@ cat $@.js >> $@
 	@ printf "</script>\n" >> $@
+	@ echo -e "<body></body></html>" >> $@ 
 	@ echo $@ rebuilded.
 
 $(WAT_OUT).js:
