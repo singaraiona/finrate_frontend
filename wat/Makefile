@@ -75,7 +75,7 @@ waclean:
 wawatch:
 	@ nodemon --exec "make $(WAT_WEC) || :" -w $(WAT_SRC) -w $(WAT) -e jsx,ts,styl,svg,woff,html,js,css -q -d 0
 
-$(WAT_OUT): $(WAT_OUT).js
+$(WAT_OUT): $(WAT_OUT).3rd $(WAT_OUT).js
 	@ mkdir -p $(@D)
 	@ rm -f $@ && touch $@
 	@ echo -e "<!DOCTYPE html PUBLIC\"-//W3C//DTD XHTML 1.0 Strict//EN\"" \
@@ -87,6 +87,7 @@ $(WAT_OUT): $(WAT_OUT).js
 	@ cat $(WAT_SRC)/*.inc >> $@
 	@ printf "<body>" >> $@
 	@ printf "<script>" >> $@
+	@ cat $@.3rd >> $@
 	@ cat $@.js >> $@
 	@ printf "</script>\n" >> $@
 	@ printf "</body></html>" >> $@ 
@@ -100,3 +101,11 @@ $(WAT_OUT).js:
       	java -jar $(WAT)/yuicompressor.jar --type js $$fl >> $@ ; \
 		rm -f $$fl ; \
 	  done
+
+$(WAT_OUT).3rd: $(WAT_INC)
+	@ $(call checkme)
+	@ $(call require, $(WAT_INC), \
+		"Some of the WAT_INC given files not found.\nDon't forget to do 'make waup' if WAT_3RD was changed.")
+	@ mkdir -p $(@D) && cat $^ | java -jar $(WAT)/yuicompressor.jar --type js > $@
+
+
