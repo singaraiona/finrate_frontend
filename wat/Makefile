@@ -85,13 +85,18 @@ $(WAT_OUT): $(WAT_OUT).js
 		"content=\"text/html; charset=utf-8\" />" \
 		"<title>$(HEADING)</title></head>" > $@
 	@ cat $(WAT_SRC)/*.inc >> $@
+	@ printf "<body>" >> $@
 	@ printf "<script>" >> $@
 	@ cat $@.js >> $@
 	@ printf "</script>\n" >> $@
-	@ echo -e "<body></body></html>" >> $@ 
+	@ printf "</body></html>" >> $@ 
 	@ echo $@ rebuilded.
 
 $(WAT_OUT).js:
+	@ for fl in $(WAT_SRC)/*.jsx ; do \
+      	jsx $$fl > $$fl.js ; \
+	  done
 	@ for fl in $(WAT_SRC)/*.js ; do \
       	java -jar $(WAT)/yuicompressor.jar --type js $$fl >> $@ ; \
+		rm -f $$fl ; \
 	  done

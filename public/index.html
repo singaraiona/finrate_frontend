@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml"> <head><meta http-equiv="content-type" content="text/html; charset=utf-8" /> <title>FinRates!</title></head>
 <script src="/socket.io/socket.io.js"></script>
-<script>var host=location.origin;var socket=io.connect(host,{transports:["websocket"]});var socket=io.connect();socket.on("news",function(a){console.log(a);socket.emit("event",{my:"data"})});</script>
-<body></body></html>
+<script src="http://fb.me/react-0.13.1.js"></script>
+<body><script>var host=location.origin;var socket=io.connect(host,{transports:["websocket"]});var socket=io.connect();socket.on("news",function(a){console.log(a);socket.emit("event",{my:"data"})});var LikeButton=React.createClass({displayName:"LikeButton",getInitialState:function(){return{liked:false}},handleClick:function(a){this.setState({liked:!this.state.liked})},render:function(){var a=this.state.liked?"like":"haven't liked";return(React.createElement("p",{onClick:this.handleClick},"You ",a," this. Click to toggle."))}});React.render(React.createElement(LikeButton,null),document.body);</script>
+</body></html>
